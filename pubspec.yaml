@@ -10,16 +10,17 @@ environment:
   sdk: '>=3.2.6 <4.0.0'
 
 dependencies:
+  firebase_core: ^2.27.0
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
   flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
 
 flutter:
   uses-material-design: true

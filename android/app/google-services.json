@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "989525129932",
+    "project_id": "creditcardfortress",
+    "storage_bucket": "creditcardfortress.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989525129932:android:30f2edba8ac849393da069",
+        "android_client_info": {
+          "package_name": "com.example.creditcard_fortress"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989525129932-33r5pj44va8470b02doo6f8pt5jk6cpk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeT_MyWOFWfLREQk8pH2uoeo-ML-y3K8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989525129932-33r5pj44va8470b02doo6f8pt5jk6cpk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "989525129932-ik1tl75b987ufungjjj56g5npe85v63m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.robertios.CardFortress.secureStore"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
