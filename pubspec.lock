@@ -49,6 +49,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  core:
+    dependency: transitive
+    description:
+      path: "packages/core"
+      relative: true
+    source: path
+    version: "0.0.1"
   data:
     dependency: "direct main"
     description:
@@ -147,6 +154,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  get_it:
+    dependency: transitive
+    description:
+      name: get_it
+      sha256: e6017ce7fdeaf218dc51a100344d8cb70134b80e28b760f8bb23c242437bafd7
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.6.7"
   http_parser:
     dependency: transitive
     description:
