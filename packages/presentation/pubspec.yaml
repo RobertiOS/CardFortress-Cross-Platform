@@ -11,8 +11,8 @@ environment:
 dependencies:
   core:
     path: ../core/
-  data:
-    path: ../data/
+  domain:
+    path: ../domain/
   flutter:
     sdk: flutter
   flutter_login: ^5.0.0

@@ -18,6 +18,10 @@ dependencies:
   #Local dependencies
   data:
    path: ./packages/data/
+  core:
+   path: ./packages/core/
+  domain:
+   path: ./packages/domain/
 
   presentation:
    path: ./packages/presentation/

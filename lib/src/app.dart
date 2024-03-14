@@ -1,3 +1,4 @@
+import 'package:creditcard_fortress/src/di/configure_di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -6,10 +7,12 @@ import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
+import 'package:presentation/presentation.dart';
+import 'package:domain/domain.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
-  const MyApp({
+  MyApp({
     super.key,
     required this.settingsController,
   });
@@ -70,7 +73,7 @@ class MyApp extends StatelessWidget {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
                   case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
+                    return TemporaryWidget();
                   case SampleItemListView.routeName:
                   default:
                     return const SampleItemListView();
@@ -80,6 +83,42 @@ class MyApp extends StatelessWidget {
           },
         );
       },
+    );
+  }
+}
+
+class TemporaryWidget extends StatelessWidget {
+  const TemporaryWidget({
+    super.key
+  });
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: StreamBuilder<bool>(
+        stream: sl.get<SignInUseCase>().isUserSignedIn,
+        builder: (context, snapshot) {
+          return MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: Container(
+                    color: Colors.blueAccent,
+                    child: snapshot.data == true
+                        ? ElevatedButton(
+                            onPressed: () async {
+                              await sl.get<SignOutUseCase>().signOut();
+                            },
+                            child: Text("sign out"))
+                        : AuthtenticationWidget(
+                            signUpUseCase: sl(),
+                            signInUseCase: sl(),
+                          )),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 
 class AuthtenticationWidget extends StatelessWidget {
-  AuthtenticationWidget({super.key});
-  final repository = FirebaseAuthRepository();
+  const AuthtenticationWidget(
+      {super.key, required this.signUpUseCase, required this.signInUseCase});
+  final SignUpUseCase signUpUseCase;
+  final SignInUseCase signInUseCase;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class AuthtenticationWidget extends StatelessWidget {
       savedPassword: '123456',
       onLogin: (loginData) async {
         try {
-          await repository.signIn(
+          await signInUseCase.signIn(
               account: loginData.name,
               password: loginData.password
               );
@@ -24,7 +26,7 @@ class AuthtenticationWidget extends StatelessWidget {
       onSignup: (userData) {
         final name = userData.additionalSignupData?['name'];
         final lastName = userData.additionalSignupData?['lastName'];
-        repository.signUp(
+        signUpUseCase.signUp(
             account: userData.name ?? '',
             password: userData.password ?? '',
             name: name ?? '',
