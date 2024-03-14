@@ -26,7 +26,7 @@ final firebaseClient = FirebaseAuth.instance;
   Future<void> signOut() async {
     try {
       await firebaseClient.signOut();
-    } on Exception catch (e) {
+    } on Exception {
       throw Exception('Sign Out: Unknown error');
     }
   }
@@ -36,5 +36,19 @@ final firebaseClient = FirebaseAuth.instance;
     return firebaseClient
     .authStateChanges()
     .map((user) => user != null);
+  }
+  
+  @override
+  Future<void> signUp(
+      {required String account,
+      required String password,
+      required String name,
+      required String lastName}) async {
+    try {
+      await firebaseClient.createUserWithEmailAndPassword(
+          email: account, password: password);
+    } on Exception {
+      throw Exception('Sign up: Unknown error');
+    }
   }
 }
