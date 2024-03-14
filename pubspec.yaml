@@ -19,6 +19,9 @@ dependencies:
   data:
    path: ./packages/data/
 
+  presentation:
+   path: ./packages/presentation/
+
 dev_dependencies:
 
   flutter_lints: ^2.0.0
