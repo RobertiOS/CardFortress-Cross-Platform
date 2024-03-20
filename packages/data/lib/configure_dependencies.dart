@@ -14,4 +14,7 @@ Future<void> configureDependencies({required GetIt sl}) async {
 
   sl.registerLazySingleton<AuthtenticationRepositoryInterface>(
       () => FirebaseAuthRepository());
+  
+  sl.registerLazySingleton<CreditCardRepository>(
+      () => CreditCardDefaultRepository());
 }
