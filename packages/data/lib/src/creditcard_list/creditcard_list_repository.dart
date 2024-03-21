@@ -2,7 +2,7 @@ import 'package:domain/domain.dart';
 
 import 'dart:async';
 
-class CreditCardDefaultRepository implements CreditCardRepository {
+class CreditCardDefaultRepository implements CreditCardRepositoryInterface {
   @override
   Future<void> removeCreditCard(String identifier) async {
   }
@@ -20,11 +20,11 @@ class CreditCardDefaultRepository implements CreditCardRepository {
   Future<CreditCard> getCreditCard(String identifier) async {
     return CreditCard(
       identifier: "1234",
-      number: "",
-      cvv: 1,
-      date: "",
-      cardName: "",
-      cardHolderName: "",
+      number: "1234 5678 9123 4567",
+      cvv: 123,
+      date: "11/26",
+      cardName: "Bac",
+      cardHolderName: "Roberto",
       notes: "",
       isFavorite: true,
     );
@@ -34,15 +34,15 @@ class CreditCardDefaultRepository implements CreditCardRepository {
   Future<List<CreditCard>> getAllCreditCards() async {
     return [
       CreditCard(
-        identifier: "1234",
-        number: "",
-        cvv: 1,
-        date: "",
-        cardName: "",
-        cardHolderName: "",
-        notes: "",
-        isFavorite: true,
-      )
+      identifier: "1234",
+      number: "12345678912345678",
+      cvv: 123,
+      date: "11/26",
+      cardName: "Bac",
+      cardHolderName: "Roberto",
+      notes: "",
+      isFavorite: true,
+    )
     ];
   }
 

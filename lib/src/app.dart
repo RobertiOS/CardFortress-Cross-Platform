@@ -2,9 +2,6 @@ import 'package:creditcard_fortress/src/di/configure_di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
-import 'sample_feature/sample_item_details_view.dart';
-import 'sample_feature/sample_item_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 import 'package:presentation/presentation.dart';
@@ -19,8 +16,19 @@ class MyApp extends StatelessWidget {
 
   final SettingsController settingsController;
 
+  
+
   @override
   Widget build(BuildContext context) {
+
+
+    sl.get<SignInUseCase>().isUserSignedIn.listen((isUserSignedIn) {
+      if (isUserSignedIn) {
+        Navigator.pushReplacementNamed(context, CreditCardList.routeName);
+      } else {
+        Navigator.pushReplacementNamed(context, AuthtenticationWidget.routeName);
+      }
+    });
     // Glue the SettingsController to the MaterialApp.
     //
     // The ListenableBuilder Widget listens to the SettingsController for changes.
@@ -72,53 +80,46 @@ class MyApp extends StatelessWidget {
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
-                  case SampleItemDetailsView.routeName:
-                    return TemporaryWidget();
-                  case SampleItemListView.routeName:
+                  case CreditCardList.routeName:
+                    return Scaffold(
+                      appBar: AppBar(title: Text("Credit card list"), actions: [
+                        IconButton(
+                          icon: const Icon(Icons.settings),
+                          onPressed: () {
+                            // Navigate to the settings page. If the user leaves and returns
+                            // to the app after it has been killed while running in the
+                            // background, the navigation stack is restored.
+                            Navigator.restorablePushNamed(
+                                context, SettingsView.routeName);
+                          },
+                        ),
+                      ]),
+                      body: CreditCardList(serviceLocator: sl),
+                    );
+                  case AuthtenticationWidget.routeName:
+                    return AuthtenticationWidget(
+                      signUpUseCase: sl(),
+                      signInUseCase: sl(),
+                      onSuccessfulSignIn: () {
+                        Navigator.pushReplacementNamed(
+                            context, CreditCardList.routeName);
+                      },
+                    );
                   default:
-                    return const SampleItemListView();
+                    return AuthtenticationWidget(
+                      signUpUseCase: sl(),
+                      signInUseCase: sl(),
+                      onSuccessfulSignIn: () {
+                        Navigator.pushReplacementNamed(
+                            context, CreditCardList.routeName);
+                      },
+                    );
                 }
               },
             );
           },
         );
       },
-    );
-  }
-}
-
-class TemporaryWidget extends StatelessWidget {
-  const TemporaryWidget({
-    super.key
-  });
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: StreamBuilder<bool>(
-        stream: sl.get<SignInUseCase>().isUserSignedIn,
-        builder: (context, snapshot) {
-          return MaterialApp(
-            home: Scaffold(
-              body: Center(
-                child: Container(
-                    color: Colors.blueAccent,
-                    child: snapshot.data == true
-                        ? ElevatedButton(
-                            onPressed: () async {
-                              await sl.get<SignOutUseCase>().signOut();
-                            },
-                            child: Text("sign out"))
-                        : AuthtenticationWidget(
-                            signUpUseCase: sl(),
-                            signInUseCase: sl(),
-                          )),
-              ),
-            ),
-          );
-        },
-      ),
     );
   }
 }
