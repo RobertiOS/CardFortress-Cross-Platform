@@ -35,3 +35,6 @@ I'm using a modular aproach to make the project easy to maintain, and easy to te
 - run flutter pub get on the root of the project.
 - Create an account (don't use real credentials or I will steal your data)
 - Enjoy the app.
+
+## _Check the app on web_
+https://robertios.github.io/CardFortress-Cross-Platform/
