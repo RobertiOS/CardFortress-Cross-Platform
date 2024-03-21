@@ -1,7 +1,7 @@
 import 'dart:async';
 import '../entities/creditcard.dart';
 
-abstract class CreditCardRepository {
+abstract class CreditCardRepositoryInterface {
   Future<void> removeCreditCard(String identifier);
   Future<void> removeAllCreditCards();
   Future<void> addCreditCard(CreditCard creditCard);

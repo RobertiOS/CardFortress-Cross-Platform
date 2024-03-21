@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
-import './firebase_options.dart';
+import '../../firebase_options.dart';
 import 'package:core/core.dart';
 import 'package:domain/domain.dart';
 import 'package:data/data.dart';
@@ -15,6 +15,6 @@ Future<void> configureDependencies({required GetIt sl}) async {
   sl.registerLazySingleton<AuthtenticationRepositoryInterface>(
       () => FirebaseAuthRepository());
   
-  sl.registerLazySingleton<CreditCardRepository>(
+  sl.registerLazySingleton<CreditCardRepositoryInterface>(
       () => CreditCardDefaultRepository());
 }

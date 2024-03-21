@@ -1,7 +1,7 @@
 import 'package:domain/domain.dart';
 
 final class GetCreditCardListUseCase {
-  final CreditCardRepository repository;
+  final CreditCardRepositoryInterface repository;
 
   GetCreditCardListUseCase({required this.repository});
 

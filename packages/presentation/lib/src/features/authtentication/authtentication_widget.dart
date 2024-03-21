@@ -4,9 +4,12 @@ import 'package:domain/domain.dart';
 
 class AuthtenticationWidget extends StatelessWidget {
   const AuthtenticationWidget(
-      {super.key, required this.signUpUseCase, required this.signInUseCase});
+      {super.key, required this.signUpUseCase, required this.signInUseCase, required this.onSuccessfulSignIn});
   final SignUpUseCase signUpUseCase;
   final SignInUseCase signInUseCase;
+  final VoidCallback onSuccessfulSignIn;
+
+  static const routeName = 'authtenticationWidget';
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +22,7 @@ class AuthtenticationWidget extends StatelessWidget {
               account: loginData.name,
               password: loginData.password
               );
+          onSuccessfulSignIn();
         } on Exception catch (e) {
           return e.toString();
         }

@@ -1,11 +1,12 @@
 import 'package:creditcard_fortress/src/di/configure_di.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
 
 void main() async {
+  //  debugPaintSizeEnabled = true;
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());
