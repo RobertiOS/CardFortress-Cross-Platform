@@ -3,4 +3,5 @@ abstract class AuthtenticationRepositoryInterface {
   Future<void> signUp({required String account, required String password, required String name, required String lastName }) async {}
   Future<void> signOut() async {}
   Stream<bool> get isUserSignedIn;
+  String? get userId;
 }

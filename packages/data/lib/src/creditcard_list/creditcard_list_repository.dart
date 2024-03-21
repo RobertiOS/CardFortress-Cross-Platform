@@ -1,8 +1,12 @@
+import 'package:data/src/dtos/creditcard.dart';
 import 'package:domain/domain.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
 class CreditCardDefaultRepository implements CreditCardRepositoryInterface {
+
+  final db = FirebaseFirestore.instance;
+
   @override
   Future<void> removeCreditCard(String identifier) async {
   }
@@ -31,19 +35,17 @@ class CreditCardDefaultRepository implements CreditCardRepositoryInterface {
   }
 
   @override
-  Future<List<CreditCard>> getAllCreditCards() async {
-    return [
-      CreditCard(
-      identifier: "1234",
-      number: "12345678912345678",
-      cvv: 123,
-      date: "11/26",
-      cardName: "Bac",
-      cardHolderName: "Roberto",
-      notes: "",
-      isFavorite: true,
-    )
-    ];
+  Future<List<CreditCard>> getAllCreditCards({required String userID}) async {
+
+    final userRef = db.collection(Collections.user).doc(userID);
+    final creditCardRef = userRef.collection(Collections.creditCard);
+
+    final creditCardDTOs = await creditCardRef.get();
+    final dtos = creditCardDTOs.docs.map((snapshot) {
+      return CreditCardDTO.fromFirestore(snapshot).toDomain();
+    },);
+
+    return dtos.toList();
   }
 
   @override
@@ -59,4 +61,9 @@ class CreditCardDefaultRepository implements CreditCardRepositoryInterface {
       isFavorite: true,
     );
   }
+}
+
+class Collections {
+  static const user = 'userInformation';
+  static const creditCard = 'creditCards';
 }

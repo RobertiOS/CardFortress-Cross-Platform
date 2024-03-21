@@ -11,10 +11,13 @@ class CreditCardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(value: serviceLocator.get<CreditcardListBloc>(),
+    return BlocProvider(create: (context) {
+      serviceLocator.get<CreditcardListBloc>().add(LoadCreditCards());
+      return serviceLocator.get<CreditcardListBloc>();
+    },
       child: BlocBuilder<CreditcardListBloc, CreditcardListState>(
         builder: (context, state) {
-          context.read<CreditcardListBloc>().add(LoadCreditCards());
+          
           switch (state) {
             case CreditcardLoadingState():
               return const Text("loading");

@@ -6,6 +6,6 @@ abstract class CreditCardRepositoryInterface {
   Future<void> removeAllCreditCards();
   Future<void> addCreditCard(CreditCard creditCard);
   Future<CreditCard> getCreditCard(String identifier);
-  Future<List<CreditCard>> getAllCreditCards();
+  Future<List<CreditCard>> getAllCreditCards({required String userID});
   Future<CreditCard?> getFavoriteCreditCard();
 }

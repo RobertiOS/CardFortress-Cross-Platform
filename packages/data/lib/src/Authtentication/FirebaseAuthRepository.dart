@@ -51,4 +51,9 @@ final firebaseClient = FirebaseAuth.instance;
       throw Exception('Sign up: Unknown error');
     }
   }
+
+  @override
+  String? get userId {
+    return firebaseClient.currentUser?.uid;
+  }
 }
